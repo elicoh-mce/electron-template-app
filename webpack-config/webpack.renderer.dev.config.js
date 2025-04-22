@@ -4,7 +4,6 @@ const { default: ReactRefreshTypeScript } = require('react-refresh-typescript');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 3000;
 
 module.exports = {
@@ -14,12 +13,16 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'renderer.js',
-        publicPath: isDevelopment ? `http://localhost:${port}/` : './'
+        publicPath: `http://localhost:${port}/`
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js'],
         alias: {
-            '@': path.resolve(__dirname, '../src/renderer')
+            '@': path.resolve(__dirname, '../src/renderer'),
+            'react': path.resolve(__dirname, '../node_modules/react'),
+            'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
+            'react/jsx-runtime': path.resolve(__dirname, '../node_modules/react/jsx-runtime.js'),
+            'react/jsx-dev-runtime': path.resolve(__dirname, '../node_modules/react/jsx-dev-runtime.js')
         }
     },
     module: {
@@ -33,21 +36,34 @@ module.exports = {
                         loader: require.resolve('ts-loader'),
                         options: {
                             getCustomTransformers: () => ({
-                                before: isDevelopment ? [ReactRefreshTypeScript()] : [],
+                                before: [ReactRefreshTypeScript()],
                             }),
-                            transpileOnly: isDevelopment,
+                            transpileOnly: true,
+                            happyPackMode: true,
+                            compilerOptions: {
+                                module: 'esnext'
+                            }
                         },
                     },
                 ],
             },
         ],
     },
+    optimization: {
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
+        minimize: false,
+        moduleIds: 'named'
+    },
     plugins: [
-        isDevelopment && new ReactRefreshWebpackPlugin(),
+        new ReactRefreshWebpackPlugin({
+            overlay: false
+        }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../public/index.html')
         })
-    ].filter(Boolean),
+    ],
     devServer: {
         port,
         hot: true,
@@ -55,10 +71,20 @@ module.exports = {
             'Access-Control-Allow-Origin': '*'
         },
         devMiddleware: {
-            publicPath: `http://localhost:${port}/`
+            publicPath: `http://localhost:${port}/`,
+            writeToDisk: false,
+            stats: 'errors-only'
         },
         static: {
             directory: path.join(__dirname, '../public')
         }
-    }
+    },
+    cache: {
+        type: 'filesystem',
+        buildDependencies: {
+            config: [__filename]
+        },
+        cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/webpack')
+    },
+    stats: 'errors-only'
 }; 

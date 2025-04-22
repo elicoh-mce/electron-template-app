@@ -1,5 +1,5 @@
 {
-  "name": "electron-builder-webpack",
+  "name": "electron-builder-example2",
   "version": "1.0.0",
   "main": "dist/main.js",
   "license": "MIT",
@@ -10,17 +10,21 @@
     }
   },
   "scripts": {
-    "dev:main": "webpack --config webpack-config/webpack.main.config.js --watch",
-    "dev:renderer": "cross-env PORT=3000 webpack serve --config webpack-config/webpack.renderer.config.js",
     "dev": "cross-env PORT=3000 concurrently --kill-others \"yarn dev:main\" \"yarn dev:renderer\" \"electron .\"",
+    "dev:main": "webpack --config webpack-config/webpack.main.config.js --watch",
+    "dev:renderer": "cross-env PORT=3000 webpack serve --config webpack-config/webpack.renderer.dev.config.js",
+    "build": "yarn build:main && yarn build:renderer",
+    "build:main": "webpack --config webpack-config/webpack.main.config.js",
+    "build:renderer": "webpack --config webpack-config/webpack.renderer.prod.config.js",
+    "start": "electron .",
     "app:dir": "electron-builder --dir",
     "compile": "webpack --config webpack-config/webpack.main.config.js && webpack --config webpack-config/webpack.renderer.config.js",
     "dist": "yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "source-map-support": "^0.5.21"
   },
   "devDependencies": {
