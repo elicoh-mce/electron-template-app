@@ -10,11 +10,11 @@
     }
   },
   "scripts": {
-    "dev:main": "webpack --config webpack.main.config.js --watch",
-    "dev:renderer": "cross-env PORT=3000 webpack serve --config webpack.renderer.config.js",
+    "dev:main": "webpack --config webpack-config/webpack.main.config.js --watch",
+    "dev:renderer": "cross-env PORT=3000 webpack serve --config webpack-config/webpack.renderer.config.js",
     "dev": "cross-env PORT=3000 concurrently --kill-others \"yarn dev:main\" \"yarn dev:renderer\" \"electron .\"",
     "app:dir": "electron-builder --dir",
-    "compile": "webpack --config webpack.main.config.js && webpack --config webpack.renderer.config.js",
+    "compile": "webpack --config webpack-config/webpack.main.config.js && webpack --config webpack-config/webpack.renderer.config.js",
     "dist": "yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
   },

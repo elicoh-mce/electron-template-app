@@ -10,18 +10,16 @@ const port = process.env.PORT || 3000;
 module.exports = {
     ...baseConfig,
     target: 'electron-renderer',
-    entry: './src/renderer/renderer.tsx',
+    entry: path.resolve(__dirname, '../src/renderer/renderer.tsx'),
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../dist'),
         filename: 'renderer.js',
         publicPath: isDevelopment ? `http://localhost:${port}/` : './'
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js'],
-        fallback: {
-            "fs": false,
-            "path": false,
-            "electron": false
+        alias: {
+            '@': path.resolve(__dirname, '../src/renderer')
         }
     },
     module: {
@@ -47,7 +45,7 @@ module.exports = {
     plugins: [
         isDevelopment && new ReactRefreshWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public/index.html')
+            template: path.resolve(__dirname, '../public/index.html')
         })
     ].filter(Boolean),
     devServer: {
@@ -60,7 +58,7 @@ module.exports = {
             publicPath: `http://localhost:${port}/`
         },
         static: {
-            directory: path.join(__dirname, 'public')
+            directory: path.join(__dirname, '../public')
         }
     }
 }; 
