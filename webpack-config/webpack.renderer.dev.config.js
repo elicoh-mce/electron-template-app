@@ -6,19 +6,22 @@ const baseConfig = require('./webpack.base.config');
 
 const port = process.env.PORT || 3000;
 
+var BUILD_DIR = path.resolve(__dirname, '../build/src');
+var APP_DIR = path.resolve(__dirname, '../src');
+
 module.exports = {
     ...baseConfig,
     target: 'electron-renderer',
-    entry: path.resolve(__dirname, '../src/renderer/renderer.tsx'),
+    entry: path.resolve(APP_DIR, './renderer/renderer.tsx'),
     output: {
-        path: path.resolve(__dirname, '../dist'),
+        path: BUILD_DIR,
         filename: 'renderer.js',
         publicPath: `http://localhost:${port}/`
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js'],
         alias: {
-            '@': path.resolve(__dirname, '../src/renderer'),
+            '@': path.resolve(APP_DIR, './renderer'),
             'react': path.resolve(__dirname, '../node_modules/react'),
             'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
             'react/jsx-runtime': path.resolve(__dirname, '../node_modules/react/jsx-runtime.js'),

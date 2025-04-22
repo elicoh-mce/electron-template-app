@@ -1,10 +1,31 @@
 {
   "name": "electron-builder-example2",
   "version": "1.0.0",
-  "main": "dist/main.js",
+  "main": "build/src/main.js",
   "license": "MIT",
   "build": {
     "appId": "com.electron.builder-webpack",
+    "files": [
+      "build/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "public"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "build/**/*"
+    ],
+    "extraMetadata": {
+      "main": "build/src/main.js"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "signAndEditExecutable": false
+    },
     "mac": {
       "category": "your.app.category.type"
     }
@@ -13,14 +34,15 @@
     "dev": "cross-env PORT=3000 concurrently --kill-others \"yarn dev:main\" \"yarn dev:renderer\" \"electron .\"",
     "dev:main": "webpack --config webpack-config/webpack.main.config.js --watch",
     "dev:renderer": "cross-env PORT=3000 webpack serve --config webpack-config/webpack.renderer.dev.config.js",
-    "build": "yarn build:main && yarn build:renderer",
+    "build": "yarn compile && electron-builder",
     "build:main": "webpack --config webpack-config/webpack.main.config.js",
     "build:renderer": "webpack --config webpack-config/webpack.renderer.prod.config.js",
     "start": "electron .",
     "app:dir": "electron-builder --dir",
-    "compile": "webpack --config webpack-config/webpack.main.config.js && webpack --config webpack-config/webpack.renderer.config.js",
-    "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+    "compile": "webpack --config webpack-config/webpack.main.config.js && webpack --config webpack-config/webpack.renderer.prod.config.js",
+    "dist": "yarn clean && yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -35,6 +57,7 @@
     "@types/react-dom": "^19.1.2",
     "@types/webpack-hot-middleware": "^2.25.9",
     "concurrently": "^8.2.2",
+    "copy-webpack-plugin": "^13.0.0",
     "cross-env": "^7.0.3",
     "electron": "^35.2.0",
     "electron-builder": "^26.0.12",

@@ -1,0 +1,8 @@
+# Ignore dist directory and its contents
+dist/
+**/dist/
+*.asar
+dist/**/*
+dist/win-unpacked/
+dist/win-unpacked/resources/
+dist/win-unpacked/resources/app.asar

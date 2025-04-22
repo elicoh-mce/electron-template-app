@@ -12,12 +12,7 @@
     "noImplicitAny": true, /* Enable error reporting for expressions and declarations with an implied 'any' type. */
     "strictNullChecks": true, /* When type checking, take into account 'null' and 'undefined'. */
     "rootDir": "src", /* Specify the root folder within your source files. */
-    "outDir": "dist", /* Specify an output folder for all emitted files. */
-    "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/electron/electron.d.ts",
-      "./src/types"
-    ],
+    "outDir": "dist" /* Specify an output folder for all emitted files. */
   },
   "include": [
     "src/**/*"
