@@ -1,0 +1,48 @@
+{
+  "name": "electron-builder-webpack",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "license": "MIT",
+  "build": {
+    "appId": "com.electron.builder-webpack",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  },
+  "scripts": {
+    "dev:main": "webpack --config webpack.main.config.js --watch",
+    "dev:renderer": "cross-env PORT=3000 webpack serve --config webpack.renderer.config.js",
+    "dev": "cross-env PORT=3000 concurrently --kill-others \"yarn dev:main\" \"yarn dev:renderer\" \"electron .\"",
+    "app:dir": "electron-builder --dir",
+    "compile": "webpack --config webpack.main.config.js && webpack --config webpack.renderer.config.js",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+    "@types/electron": "^1.6.12",
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@types/webpack-hot-middleware": "^2.25.9",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^35.2.0",
+    "electron-builder": "^26.0.12",
+    "electron-webpack": "^2.8.2",
+    "html-webpack-plugin": "^5.6.3",
+    "react-refresh": "^0.14.1",
+    "react-refresh-typescript": "^2.0.10",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.6",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-hot-middleware": "^2.26.1"
+  }
+}
