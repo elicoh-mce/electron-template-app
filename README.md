@@ -5,7 +5,7 @@ This project is a modern Electron application built with TypeScript and React, f
 ## Project Structure
 
 ```
-electron-builder-example2/
+electron-template-app/
 ├── src/
 │   ├── main/          # Main process code
 │   └── renderer/      # Renderer process code (React)

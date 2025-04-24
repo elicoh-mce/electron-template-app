@@ -1,5 +1,5 @@
 {
-  "name": "electron-builder-example2",
+  "name": "electron-template-app",
   "version": "1.0.0",
   "main": "build/src/main.js",
   "license": "MIT",
@@ -12,8 +12,7 @@
       "package.json"
     ],
     "directories": {
-      "output": "dist",
-      "buildResources": "static"
+      "output": "dist"
     },
     "asar": true,
     "asarUnpack": [
@@ -33,18 +32,18 @@
     }
   },
   "scripts": {
-    "dev": "cross-env PORT=3000 concurrently --kill-others \"yarn dev:main\" \"yarn dev:renderer\" \"electron .\"",
-    "dev:main": "webpack --config webpack-config/webpack.main.config.js --watch",
-    "dev:renderer": "cross-env PORT=3000 webpack serve --config webpack-config/webpack.renderer.dev.config.js",
+    "dev": "cross-env NODE_ENV=development PORT=3000 concurrently --kill-others \"yarn dev:main\" \"yarn dev:renderer\" \"electron .\"",
+    "dev:main": "cross-env NODE_ENV=development webpack --config webpack-config/webpack.main.config.js --watch",
+    "dev:renderer": "cross-env NODE_ENV=development PORT=3000 webpack serve --config webpack-config/webpack.renderer.dev.config.js",
     "build": "yarn compile && electron-builder",
-    "build:main": "webpack --config webpack-config/webpack.main.config.js",
-    "build:renderer": "webpack --config webpack-config/webpack.renderer.prod.config.js",
-    "start": "electron .",
+    "build:main": "cross-env NODE_ENV=production webpack --config webpack-config/webpack.main.config.js",
+    "build:renderer": "cross-env NODE_ENV=production webpack --config webpack-config/webpack.renderer.prod.config.js",
+    "start": "cross-env NODE_ENV=production electron .",
     "app:dir": "electron-builder --dir",
-    "compile": "webpack --config webpack-config/webpack.main.config.js && webpack --config webpack-config/webpack.renderer.prod.config.js",
+    "compile": "cross-env NODE_ENV=production webpack --config webpack-config/webpack.main.config.js && cross-env NODE_ENV=production webpack --config webpack-config/webpack.renderer.prod.config.js",
     "dist": "yarn clean && yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist && rimraf build/src"
   },
   "dependencies": {
     "react": "^18.2.0",

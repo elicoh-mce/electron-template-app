@@ -76,7 +76,7 @@ module.exports = {
             overlay: false
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../static/index.html')
+            template: path.resolve(__dirname, '../index.html')
         })
     ],
     devServer: {
@@ -89,9 +89,6 @@ module.exports = {
             publicPath: `http://localhost:${port}/`,
             writeToDisk: false,
             stats: 'errors-only'
-        },
-        static: {
-            directory: path.join(__dirname, '../static')
         }
     },
     cache: {

@@ -34,7 +34,7 @@ function createMainWindow() {
         })
     }
     else {
-        window.loadFile(path.join(__dirname, '../dist/index.html'))
+        window.loadFile(path.resolve(__dirname, 'index.html'))
     }
 
     window.on('closed', () => {

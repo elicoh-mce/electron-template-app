@@ -1,13 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var APP_DIR = path.resolve(__dirname, '../src');
+var BUILD_DIR = path.resolve(__dirname, '../build/src');
+
 module.exports = {
     mode: 'production',
     devtool: 'source-map',
     target: 'electron-renderer',
-    entry: path.resolve(__dirname, '../src/renderer/renderer.tsx'),
+    entry: path.resolve(APP_DIR, './renderer/renderer.tsx'),
     output: {
-        path: path.resolve(__dirname, '../dist'),
+        path: BUILD_DIR,
         filename: 'renderer.js',
         publicPath: './'
     },
@@ -50,7 +53,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../static/index.html')
+            template: path.resolve(__dirname, '../index.html')
         })
     ]
 }; 
