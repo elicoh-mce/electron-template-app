@@ -2,7 +2,6 @@ const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { default: ReactRefreshTypeScript } = require('react-refresh-typescript');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const baseConfig = require('./webpack.base.config');
 
 const port = process.env.PORT || 3000;
 
@@ -10,7 +9,8 @@ var BUILD_DIR = path.resolve(__dirname, '../build/src');
 var APP_DIR = path.resolve(__dirname, '../src');
 
 module.exports = {
-    ...baseConfig,
+    mode: 'development',
+    devtool: 'eval-source-map',
     target: 'electron-renderer',
     entry: path.resolve(APP_DIR, './renderer/renderer.tsx'),
     output: {
@@ -29,23 +29,35 @@ module.exports = {
         }
     },
     module: {
-        ...baseConfig.module,
         rules: [
             {
                 test: /\.[jt]sx?$/,
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: require.resolve('ts-loader'),
+                        loader: 'swc-loader',
                         options: {
-                            getCustomTransformers: () => ({
-                                before: [ReactRefreshTypeScript()],
-                            }),
-                            transpileOnly: true,
-                            happyPackMode: true,
-                            compilerOptions: {
-                                module: 'esnext'
-                            }
+                            jsc: {
+                                parser: {
+                                    syntax: 'typescript',
+                                    tsx: true,
+                                    decorators: true,
+                                    dynamicImport: true,
+                                },
+                                transform: {
+                                    react: {
+                                        runtime: 'automatic',
+                                        refresh: true,
+                                        development: true,
+                                    },
+                                },
+                                target: 'es2018',
+                                loose: false,
+                                externalHelpers: true,
+                                keepClassNames: true,
+                            },
+                            sourceMaps: true,
+                            isModule: true,
                         },
                     },
                 ],
