@@ -9,7 +9,7 @@ electron-builder-example2/
 ├── src/
 │   ├── main/          # Main process code
 │   └── renderer/      # Renderer process code (React)
-├── public/            # Static assets
+├── static/            # Static assets
 ├── webpack-config/    # Webpack configuration files
 └── build/            # Build output directory
 ```
@@ -74,7 +74,7 @@ The project uses separate webpack configurations for development and production:
 ### Main Process Configuration (`webpack.main.config.js`)
 
 - Handles the Electron main process
-- Copies static assets from public directory
+- Copies static assets from static directory
 - Configures TypeScript compilation
 
 ## Building for Production

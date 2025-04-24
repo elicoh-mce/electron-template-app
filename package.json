@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "build/src/main.js",
   "license": "MIT",
+  "author": "Eli Cohen",
+  "description": "A simple Electron app with React Electron Builder",
   "build": {
     "appId": "com.electron.builder-webpack",
     "files": [
@@ -11,7 +13,7 @@
     ],
     "directories": {
       "output": "dist",
-      "buildResources": "public"
+      "buildResources": "static"
     },
     "asar": true,
     "asarUnpack": [
@@ -52,7 +54,6 @@
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@swc/core": "^1.11.22",
-    "@types/electron": "^1.6.12",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
@@ -61,16 +62,15 @@
     "copy-webpack-plugin": "^13.0.0",
     "cross-env": "^7.0.3",
     "electron": "^35.2.0",
+    "electron-builder": "^26.0.12",
     "electron-webpack": "^2.8.2",
     "html-webpack-plugin": "^5.6.3",
     "react-refresh": "^0.14.1",
     "react-refresh-typescript": "^2.0.10",
     "swc-loader": "^0.2.6",
-    "ts-loader": "^9.5.1",
     "typescript": "^5.8.3",
     "webpack": "^5.99.6",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1",
-    "webpack-hot-middleware": "^2.26.1"
+    "webpack-dev-server": "^5.2.1"
   }
 }

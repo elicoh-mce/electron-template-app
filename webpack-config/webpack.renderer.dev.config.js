@@ -76,7 +76,7 @@ module.exports = {
             overlay: false
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../public/index.html')
+            template: path.resolve(__dirname, '../static/index.html')
         })
     ],
     devServer: {
@@ -91,7 +91,7 @@ module.exports = {
             stats: 'errors-only'
         },
         static: {
-            directory: path.join(__dirname, '../public')
+            directory: path.join(__dirname, '../static')
         }
     },
     cache: {

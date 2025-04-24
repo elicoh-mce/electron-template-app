@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var BUILD_DIR = path.resolve(__dirname, '../build/src');
 var APP_DIR = path.resolve(__dirname, '../src');
-const PUBLIC_DIR = path.resolve(__dirname, '../public');
+const PUBLIC_DIR = path.resolve(__dirname, '../static');
 
 module.exports = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -58,7 +58,7 @@ module.exports = {
             patterns: [
                 {
                     from: PUBLIC_DIR,
-                    to: path.join(BUILD_DIR, 'public'),
+                    to: path.join(BUILD_DIR, 'static'),
                     globOptions: {
                         ignore: ['**/node_modules/**']
                     }
