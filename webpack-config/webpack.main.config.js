@@ -8,7 +8,7 @@ module.exports = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map',
     target: 'electron-main',
-    entry: path.resolve(APP_DIR, './main/main.js'),
+    entry: path.resolve(APP_DIR, './main/main.ts'),
     output: {
         path: BUILD_DIR,
         filename: 'main.js',

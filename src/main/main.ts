@@ -1,12 +1,11 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
-import { format as formatUrl } from 'url'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 3000
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
-let mainWindow
+let mainWindow: BrowserWindow | undefined;
 
 function createMainWindow() {
     const window = new BrowserWindow({
@@ -38,7 +37,7 @@ function createMainWindow() {
     }
 
     window.on('closed', () => {
-        mainWindow = null
+        mainWindow = undefined;
     })
 
     window.webContents.on('devtools-opened', () => {
@@ -61,7 +60,7 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     // on macOS it is common to re-create a window even after all windows have been closed
-    if (mainWindow === null) {
+    if (!mainWindow) {
         mainWindow = createMainWindow()
     }
 })
