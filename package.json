@@ -1,7 +1,7 @@
 {
   "name": "electron-template-app",
   "version": "1.0.0",
-  "main": "build/src/main.js",
+  "main": "build/main.js",
   "license": "MIT",
   "author": "Eli Cohen",
   "description": "A simple Electron app with React Electron Builder",
@@ -19,7 +19,7 @@
       "build/**/*"
     ],
     "extraMetadata": {
-      "main": "build/src/main.js"
+      "main": "build/main.js"
     },
     "win": {
       "target": [
@@ -32,18 +32,12 @@
     }
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development PORT=3000 concurrently --kill-others \"yarn dev:main\" \"yarn dev:renderer\" \"electron .\"",
-    "dev:main": "cross-env NODE_ENV=development webpack --config webpack-config/webpack.main.config.js --watch",
-    "dev:renderer": "cross-env NODE_ENV=development PORT=3000 webpack serve --config webpack-config/webpack.renderer.dev.config.js",
-    "build": "yarn compile && electron-builder",
-    "build:main": "cross-env NODE_ENV=production webpack --config webpack-config/webpack.main.config.js",
-    "build:renderer": "cross-env NODE_ENV=production webpack --config webpack-config/webpack.renderer.prod.config.js",
-    "start": "cross-env NODE_ENV=production electron .",
     "app:dir": "electron-builder --dir",
-    "compile": "cross-env NODE_ENV=production webpack --config webpack-config/webpack.main.config.js && cross-env NODE_ENV=production webpack --config webpack-config/webpack.renderer.prod.config.js",
-    "dist": "yarn clean && yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "clean": "rimraf dist && rimraf build/src"
+    "clean": "rimraf dist && rimraf build",
+    "dev": "electron-vite serve --mode dev",
+    "build": "electron-vite build --mode prod",
+    "dist": "yarn clean && yarn vite:build && electron-builder"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -60,17 +54,21 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/webpack-hot-middleware": "^2.25.9",
+    "@vitejs/plugin-react": "^4.4.1",
     "concurrently": "^8.2.2",
     "copy-webpack-plugin": "^13.0.0",
     "cross-env": "^7.0.3",
     "electron": "^35.2.0",
     "electron-builder": "^26.0.12",
+    "electron-vite": "^3.1.0",
     "electron-webpack": "^2.8.2",
+    "esbuild-register": "^3.6.0",
     "html-webpack-plugin": "^5.6.3",
     "react-refresh": "^0.14.1",
     "react-refresh-typescript": "^2.0.10",
     "swc-loader": "^0.2.6",
     "typescript": "^5.8.3",
+    "vite": "^6.3.3",
     "webpack": "^5.99.6",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.1"

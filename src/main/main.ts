@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+const isDevelopment = process.env.NODE_ENV === 'development'
 const port = process.env.PORT || 3000
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
@@ -33,7 +33,7 @@ function createMainWindow() {
         })
     }
     else {
-        window.loadFile(path.resolve(__dirname, 'index.html'))
+        window.loadFile(path.resolve(__dirname, './renderer/index.html'))
     }
 
     window.on('closed', () => {
