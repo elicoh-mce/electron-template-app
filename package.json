@@ -47,30 +47,19 @@
   "devDependencies": {
     "@mcesystems/reflow": "^7.0.0",
     "@mcesystems/reflow-react-display-layer": "^7.0.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@swc/core": "^1.11.22",
     "@swc/helpers": "^0.5.17",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "@types/webpack-hot-middleware": "^2.25.9",
     "@vitejs/plugin-react": "^4.4.1",
     "concurrently": "^8.2.2",
-    "copy-webpack-plugin": "^13.0.0",
-    "cross-env": "^7.0.3",
     "electron": "^35.2.0",
     "electron-builder": "^26.0.12",
     "electron-vite": "^3.1.0",
-    "electron-webpack": "^2.8.2",
     "esbuild-register": "^3.6.0",
-    "html-webpack-plugin": "^5.6.3",
-    "react-refresh": "^0.14.1",
-    "react-refresh-typescript": "^2.0.10",
     "swc-loader": "^0.2.6",
     "typescript": "^5.8.3",
-    "vite": "^6.3.3",
-    "webpack": "^5.99.6",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.2.1"
+    "vite": "^6.3.3"
   }
 }

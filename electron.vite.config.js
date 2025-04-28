@@ -17,15 +17,21 @@ export default defineConfig({
   renderer: defineViteConfig(({ command, mode }) => {
     const env = loadEnv(mode);
     console.log(env.SOME_VAR, mode);
+
+    const commonConfig = {
+      plugins: [react()],
+    }
+
     if (command === 'serve') {
       return {
+        ...commonConfig,
         server: {
           port: 3000,
         },
       }
     } else {
       return {
-        plugins: [react()],
+        ...commonConfig,
         build: {
           outDir: 'build/renderer',
           emptyOutDir: true,
